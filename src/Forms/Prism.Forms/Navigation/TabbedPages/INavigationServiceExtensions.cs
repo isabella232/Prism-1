@@ -40,7 +40,7 @@ namespace Prism.Navigation.TabbedPages
                 if (tabbedPage == null)
                     throw new Exception("No parent TabbedPage could be found");
 
-                var tabToSelectedType = PageNavigationRegistry.GetPageType(UriParsingHelper.GetSegmentName(name));
+                var tabToSelectedType = NavigationRegistry.GetPageType(UriParsingHelper.GetSegmentName(name));
                 if (tabToSelectedType is null)
                     throw new Exception($"No View Type has been registered for '{name}'");
 

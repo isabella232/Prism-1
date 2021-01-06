@@ -275,12 +275,12 @@ namespace Prism.Navigation
 
         private static Page ProcessCurrentPageNavigationPath(Page page, Stack<string> stack)
         {
-            var currentPageKeyInfo = PageNavigationRegistry.GetPageNavigationInfo(page.GetType());
+            var currentPageKeyInfo = NavigationRegistry.GetPageNavigationInfo(page.GetType());
             string currentSegment = $"{currentPageKeyInfo.Name}";
 
             if (page.Parent is Page parent)
             {
-                var parentKeyInfo = PageNavigationRegistry.GetPageNavigationInfo(parent.GetType());
+                var parentKeyInfo = NavigationRegistry.GetPageNavigationInfo(parent.GetType());
 
                 if (parent is TabbedPage || parent is CarouselPage)
                 {
@@ -305,7 +305,7 @@ namespace Prism.Navigation
             if (page == null)
                 return;
 
-            var keyInfo = PageNavigationRegistry.GetPageNavigationInfo(page.GetType());
+            var keyInfo = NavigationRegistry.GetPageNavigationInfo(page.GetType());
             if (keyInfo != null)
                 stack.Push(keyInfo.Name);
         }

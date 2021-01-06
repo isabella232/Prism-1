@@ -117,7 +117,7 @@ namespace Prism.Regions.Adapters
                         _region.Activate(newActiveView);
                     }
 
-                    var info = PageNavigationRegistry.GetPageNavigationInfo(newActiveView.GetType());
+                    var info = NavigationRegistry.GetPageNavigationInfo(newActiveView.GetType());
                     var context = new NavigationContext(_region.NavigationService, new Uri(info.Name, UriKind.RelativeOrAbsolute));
 
                     MvvmHelpers.OnNavigatedFrom(previousView, context);

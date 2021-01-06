@@ -12,13 +12,13 @@ namespace Prism.Forms.Tests.Navigation
         [Fact]
         public void RegisterPageForNavigation()
         {
-            PageNavigationRegistry.ClearRegistrationCache();
+            NavigationRegistry.ClearRegistrationCache();
 
             var name = "MainPage";
             var type = typeof(PageMock);
-            PageNavigationRegistry.Register(name, type);
+            NavigationRegistry.Register(name, type, null);
 
-            var info = PageNavigationRegistry.GetPageNavigationInfo(name);
+            var info = NavigationRegistry.GetPageNavigationInfo(name);
 
             Assert.NotNull(info);
         }
@@ -27,7 +27,7 @@ namespace Prism.Forms.Tests.Navigation
         public void NavigationInfoIsNullForUnregisteredPage()
         {
             var name = "UnRegisteredPage";
-            var info = PageNavigationRegistry.GetPageNavigationInfo(name);
+            var info = NavigationRegistry.GetPageNavigationInfo(name);
 
             Assert.Null(info);
         }
@@ -35,13 +35,13 @@ namespace Prism.Forms.Tests.Navigation
         [Fact]
         public void GetPageType()
         {
-            PageNavigationRegistry.ClearRegistrationCache();
+            NavigationRegistry.ClearRegistrationCache();
 
             var name = "MainPage";
             var type = typeof(PageMock);
-            PageNavigationRegistry.Register(name, type);
+            NavigationRegistry.Register(name, type, null);
 
-            var infoType = PageNavigationRegistry.GetPageType(name);
+            var infoType = NavigationRegistry.GetPageType(name);
 
             Assert.Equal(type, infoType);
         }
@@ -50,14 +50,14 @@ namespace Prism.Forms.Tests.Navigation
         public void PageTypeIsNullForUnregisteredPage()
         {
             var name = "UnRegisteredPage";
-            var infoType = PageNavigationRegistry.GetPageType(name);
+            var infoType = NavigationRegistry.GetPageType(name);
 
             Assert.Null(infoType);
         }
 
         public void Dispose()
         {
-            PageNavigationRegistry.ClearRegistrationCache();
+            NavigationRegistry.ClearRegistrationCache();
         }
     }
 }

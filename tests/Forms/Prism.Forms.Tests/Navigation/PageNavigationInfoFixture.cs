@@ -23,12 +23,12 @@ namespace Prism.Forms.Tests.Navigation
         {
             var info = new PageNavigationInfo();
 
-            Assert.Null(info.Type);
+            Assert.Null(info.ViewType);
 
             var type = typeof(PageMock);
-            info.Type = type;
+            info.ViewType = type;
 
-            Assert.Equal(info.Type, type);
+            Assert.Equal(info.ViewType, type);
         }
     }
 }

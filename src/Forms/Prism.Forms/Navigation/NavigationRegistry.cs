@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 
 namespace Prism.Navigation
 {
-    public static class PageNavigationRegistry
+    public static class NavigationRegistry
     {
         static Dictionary<string, PageNavigationInfo> _pageRegistrationCache = new Dictionary<string, PageNavigationInfo>();
 
-        public static void Register(string name, Type pageType)
+        public static void Register(string name, Type viewType, Type viewModelType)
         {
             var info = new PageNavigationInfo
             {
                 Name = name,
-                Type = pageType
+                ViewType = viewType,
+                ViewModelType = viewModelType
             };
 
             if (!_pageRegistrationCache.ContainsKey(name))
@@ -28,11 +30,11 @@ namespace Prism.Navigation
             return null;
         }
 
-        public static PageNavigationInfo GetPageNavigationInfo(Type pageType)
+        public static PageNavigationInfo GetPageNavigationInfo(Type viewType)
         {
             foreach (var item in _pageRegistrationCache)
             {
-                if (item.Value.Type == pageType)
+                if (item.Value.ViewType == viewType)
                     return item.Value;
             }
 
@@ -41,8 +43,11 @@ namespace Prism.Navigation
 
         public static Type GetPageType(string name)
         {
-            return GetPageNavigationInfo(name)?.Type;
+            return GetPageNavigationInfo(name)?.ViewType;
         }
+
+        public static string GetViewKey(Type type) =>
+            _pageRegistrationCache.FirstOrDefault(x => x.Value.ViewType == type || x.Value.ViewModelType == type).Value?.Name;
 
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static void ClearRegistrationCache()

@@ -19,7 +19,7 @@ namespace Prism.Forms.Tests.Mocks
             if (!_registeredPages.ContainsKey(key))
             {
                 _registeredPages.Add(key, type);
-                PageNavigationRegistry.Register(key, type);
+                NavigationRegistry.Register(key, type, null);
             }
             return this;
         }
@@ -74,7 +74,7 @@ namespace Prism.Forms.Tests.Mocks
 
         public void Dispose()
         {
-            PageNavigationRegistry.ClearRegistrationCache();
+            NavigationRegistry.ClearRegistrationCache();
         }
 
         public void FinalizeExtension()

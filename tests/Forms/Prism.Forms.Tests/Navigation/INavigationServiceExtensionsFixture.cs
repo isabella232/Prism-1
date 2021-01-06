@@ -22,15 +22,15 @@ namespace Prism.Forms.Tests.Navigation
             var container = new Mock<IContainerExtension>();
             container.Setup(x => x.CreateScope()).Returns(Mock.Of<IScopedProvider>());
             ContainerLocator.SetContainerExtension(() => container.Object);
-            PageNavigationRegistry.ClearRegistrationCache();
+            NavigationRegistry.ClearRegistrationCache();
 
-            PageNavigationRegistry.Register("NavigationPage", typeof(NavigationPage));
-            PageNavigationRegistry.Register("Page1", typeof(NavigationPathPageMock));
-            PageNavigationRegistry.Register("Page2", typeof(NavigationPathPageMock2));
-            PageNavigationRegistry.Register("Page3", typeof(NavigationPathPageMock3));
-            PageNavigationRegistry.Register("Page4", typeof(NavigationPathPageMock4));
-            PageNavigationRegistry.Register("TabbedPage1", typeof(NavigationPathTabbedPageMock));
-            PageNavigationRegistry.Register("MasterDetailPage", typeof(MasterDetailPage));
+            NavigationRegistry.Register("NavigationPage", typeof(NavigationPage), null);
+            NavigationRegistry.Register("Page1", typeof(NavigationPathPageMock), null);
+            NavigationRegistry.Register("Page2", typeof(NavigationPathPageMock2), null);
+            NavigationRegistry.Register("Page3", typeof(NavigationPathPageMock3), null);
+            NavigationRegistry.Register("Page4", typeof(NavigationPathPageMock4), null);
+            NavigationRegistry.Register("TabbedPage1", typeof(NavigationPathTabbedPageMock), null);
+            NavigationRegistry.Register("MasterDetailPage", typeof(MasterDetailPage), null);
         }
 
         [Fact]

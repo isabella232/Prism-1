@@ -1,5 +1,4 @@
 ﻿using System;
-using Prism.Navigation;
 
 namespace Prism.Navigation
 {
@@ -7,6 +6,8 @@ namespace Prism.Navigation
     {
         public string Name { get; set; }
 
-        public Type Type { get; set; }
+        public Type ViewType { get; set; }
+
+        public Type ViewModelType { get; set; }
     }
 }

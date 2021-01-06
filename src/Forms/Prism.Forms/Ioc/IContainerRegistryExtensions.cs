@@ -32,7 +32,7 @@ namespace Prism.Ioc
         /// <param name="name">The unique name to register with the Page</param>
         public static void RegisterForNavigation(this IContainerRegistry containerRegistry, Type viewType, string name)
         {
-            PageNavigationRegistry.Register(name, viewType);
+            NavigationRegistry.Register(name, viewType, null);
             containerRegistry.Register(typeof(object), viewType, name);
         }
 
@@ -196,6 +196,7 @@ namespace Prism.Ioc
             if (string.IsNullOrWhiteSpace(name))
                 name = viewType.Name;
 
+            NavigationRegistry.Register(name, viewType, viewModelType);
             ViewModelLocationProvider.Register(viewType.ToString(), viewModelType);
 
             containerRegistry.RegisterForNavigation(viewType, name);
