@@ -18,11 +18,7 @@ using Xamarin.Forms.Mocks;
 using Xunit;
 using Xunit.Abstractions;
 
-#if DryIoc
-namespace Prism.DryIoc.Forms.Tests.Fixtures
-#elif Unity
-namespace Prism.Unity.Forms.Tests.Fixtures
-#endif
+namespace Prism.DI.Forms.Tests.Fixtures.Navigation
 {
     public class PrismApplicationFixture : FixtureBase
     {

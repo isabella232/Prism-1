@@ -9,6 +9,10 @@ namespace Prism.Navigation
     {
         static Dictionary<string, PageNavigationInfo> _pageRegistrationCache = new Dictionary<string, PageNavigationInfo>();
 
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static IReadOnlyList<PageNavigationInfo> Cache =>
+            _pageRegistrationCache.Select(x => x.Value).ToList();
+
         public static void Register(string name, Type viewType, Type viewModelType)
         {
             var info = new PageNavigationInfo
@@ -47,7 +51,7 @@ namespace Prism.Navigation
         }
 
         public static string GetViewKey(Type type) =>
-            _pageRegistrationCache.FirstOrDefault(x => x.Value.ViewType == type || x.Value.ViewModelType == type).Value?.Name;
+            Cache.FirstOrDefault(x => x.ViewType == type || x.ViewModelType == type)?.Name;
 
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static void ClearRegistrationCache()

@@ -159,5 +159,11 @@ namespace Prism.Common
             }
             return null;
         }
+
+        public static void Deconstruct(this KeyValuePair<string, object> parameter, out string key, out object value)
+        {
+            key = parameter.Key;
+            value = parameter.Value;
+        }
     }
 }

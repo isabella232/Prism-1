@@ -13,6 +13,9 @@ namespace Prism.Navigation
     /// </summary>
     public static class INavigationServiceExtensions
     {
+        public static INavigationBuilder CreateBuilder(this INavigationService navigationService) =>
+            new NavigationBuilder(navigationService);
+
         /// <summary>
         /// Provides an easy to use way to provide an Error Callback without using await NavigationService
         /// </summary>

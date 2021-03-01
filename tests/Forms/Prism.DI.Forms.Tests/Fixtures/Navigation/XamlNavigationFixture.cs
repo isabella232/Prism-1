@@ -12,15 +12,7 @@ using Xamarin.Forms.Xaml.Internals;
 using Xunit;
 using Xunit.Abstractions;
 
-#if Autofac
-namespace Prism.Autofac.Forms.Tests.Fixtures
-#elif DryIoc
-namespace Prism.DryIoc.Forms.Tests.Fixtures
-#elif Ninject
-namespace Prism.Ninject.Forms.Tests.Fixtures
-#elif Unity
-namespace Prism.Unity.Forms.Tests.Fixtures
-#endif
+namespace Prism.DI.Forms.Tests.Fixtures.Navigation
 {
     public class XamlNavigationFixture : FixtureBase
     {
