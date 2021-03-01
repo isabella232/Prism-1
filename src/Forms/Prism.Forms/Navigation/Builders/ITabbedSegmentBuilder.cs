@@ -4,7 +4,7 @@ namespace Prism.Navigation
 {
     public interface ITabbedSegmentBuilder
     {
-        ITabbedSegmentBuilder CreateTab(Action<ISegmentBuilder> configureSegment);
+        ITabbedSegmentBuilder CreateTab(Action<ICreateTabBuilder> configureSegment);
 
         ITabbedSegmentBuilder SelectedTab(string segmentName);
 

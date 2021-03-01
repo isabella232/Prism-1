@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Xamarin.Forms;
 
 namespace Prism.Navigation
 {
@@ -10,6 +11,12 @@ namespace Prism.Navigation
         public TabbedSegmentBuilder()
         {
             _parameters = new NavigationParameters();
+
+            var registrationInfo = NavigationRegistry.Cache.FirstOrDefault(x => x.ViewType.IsAssignableFrom(typeof(TabbedPage)));
+            if (registrationInfo is null)
+                throw new NavigationException(NavigationException.NoPageIsRegistered, null);
+
+            SegmentName = registrationInfo.Name;
         }
 
         public string SegmentName { get; set; }
@@ -27,11 +34,16 @@ namespace Prism.Navigation
             return AddSegmentParameter(KnownNavigationParameters.UseModalNavigation, useModalNavigation);
         }
 
-        public ITabbedSegmentBuilder CreateTab(Action<ISegmentBuilder> configureSegment)
+        public ITabbedSegmentBuilder CreateTab(Action<ICreateTabBuilder> configureSegment)
         {
-            var builder = new SegmentBuilder(null);
+            if(configureSegment is null)
+            {
+                throw new ArgumentNullException(nameof(configureSegment));
+            }
 
-            throw new NotImplementedException();
+            var builder = new CreateTabBuilder();
+            configureSegment(builder);
+            return AddSegmentParameter(KnownNavigationParameters.CreateTab, builder.Segment);
         }
 
         public ITabbedSegmentBuilder SelectedTab(string segmentName)

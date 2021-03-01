@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Moq;
 using Prism.Forms.Tests.Navigation.Mocks.ViewModels;
 using Prism.Forms.Tests.Navigation.Mocks.Views;
@@ -8,7 +6,6 @@ using Prism.Ioc;
 using Prism.Navigation;
 using Xamarin.Forms;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Prism.Forms.Tests.Navigation
 {
@@ -92,6 +89,34 @@ namespace Prism.Forms.Tests.Navigation
                .AddNavigationSegment("ViewB", o => o.UseModalNavigation()) as NavigationBuilder;
 
             Assert.Equal(new Uri("NavigationPage/ViewA/ViewB?useModalNavigation=True", UriKind.Relative), builder.BuildUri());
+        }
+
+        [Fact]
+        public void ConstructsDynamicTabbedPage()
+        {
+            var builder = Mock.Of<INavigationService>()
+               .CreateBuilder()
+               .AddTabbedSegment(o =>
+               {
+                   o.CreateTab("Tab1Mock");
+                   o.CreateTab("Tab2Mock");
+               }) as NavigationBuilder;
+
+            Assert.Equal(new Uri("TabbedPage?createTab=Tab1Mock&createTab=Tab2Mock", UriKind.Relative), builder.BuildUri());
+        }
+
+        [Fact]
+        public void UriEncodesCreateTabQueryString()
+        {
+            var builder = Mock.Of<INavigationService>()
+               .CreateBuilder()
+               .AddTabbedSegment(o =>
+               {
+                   o.CreateTab("Tab1Mock", t => t.AddSegmentParameter("id", 3));
+                   o.CreateTab("Tab2Mock");
+               }) as NavigationBuilder;
+
+            Assert.Equal(new Uri("TabbedPage?createTab=Tab1Mock%3Fid%3D3&createTab=Tab2Mock", UriKind.Relative), builder.BuildUri());
         }
 
         public void Dispose()
